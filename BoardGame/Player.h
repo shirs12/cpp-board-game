@@ -6,6 +6,7 @@ class Player
 {
 public:
 	char cNumber = '0';
+
 	int nStartPointRow = 0;
 	int nStartPointCol = 0;
 	int nCurrentPointRow = 0;

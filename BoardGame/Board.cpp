@@ -72,6 +72,20 @@ void Board::initWinningMat(int row, int col, int height, int width) {
 	}
 }
 
+// initialize player's point on board
+void Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
+	if (row < 1 || row >(SIZE - 2) || col < 1 || col >(SIZE - 2))
+	{
+		cout << "Out of border." << endl;
+	}
+	else
+	{
+		matrix[curRow][curCol] = ' ';
+		matrix[row][col] = num;
+		cout << endl;
+	}
+}
+
 //checks if one of the players won
 bool Board::isOnWinningMat(int row, int col) {
 	if (matrix[row][col] == '*')
@@ -83,6 +97,8 @@ bool Board::isOnWinningMat(int row, int col) {
 
 // print matrix
 void Board::printBoard() {
+	cout << endl;
+
 	for (int i = 0; i < SIZE; i++)
 	{
 		for (int j = 0; j < SIZE; j++)
@@ -91,6 +107,8 @@ void Board::printBoard() {
 		}
 		cout << endl;  // Newline for new row
 	}
+
+	cout << endl;
 }
 
 

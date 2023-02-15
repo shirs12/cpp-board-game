@@ -19,7 +19,8 @@ Player::Player(char num, int row, int col) {
 // methods
 
 void Player::moveUp() {
-	if (nCurrentPointRow-- < 0)
+	int num = nCurrentPointRow;
+	if (num-- < 0)
 	{
 		cout << "Out of border." << endl;
 	}
@@ -34,7 +35,8 @@ void Player::moveDown() {
 }
 
 void Player::moveLeft() {
-	if (nCurrentPointCol-- < 0)
+	int num = nCurrentPointCol;
+	if (num-- < 0)
 	{
 		cout << "Out of border." << endl;
 	}

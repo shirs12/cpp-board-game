@@ -24,6 +24,9 @@ public:
 	// initialize winning-mat on board
 	void initWinningMat(int row, int col, int height, int width);
 
+	// place player's point on board after moving
+	void placePlayer(char num, int curRow, int curCol, int row, int col);
+
 	//checks if one of the players won
 	bool isOnWinningMat(int row, int col);
 
