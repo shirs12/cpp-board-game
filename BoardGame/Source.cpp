@@ -50,6 +50,7 @@ void switchTurns(bool flag1, bool flag2) {
 
 int main() {
 
+#pragma region Variables Declaration
 	Board board;
 
 	int firstPlayerRow;
@@ -71,7 +72,11 @@ int main() {
 	bool firstWinningFlag = false;
 	bool secondWinningFlag = false;
 
+#pragma endregion
+
 	board.printBoard();
+
+#pragma region User Input - Initial Board & Players
 
 	// input row and col from user - first player
 	cout << "Enter first player starting point,\nenter row: " << endl;
@@ -109,9 +114,11 @@ int main() {
 
 	board.initWinningMat(winningMatRow, winningMatCol, winningMatHeight, winningMatWidth);
 
+#pragma endregion
+
 	board.printBoard();
 
-	while (!firstWinningFlag || !secondWinningFlag)
+	while (!firstWinningFlag && !secondWinningFlag)
 	{
 		cout << "Please enter your step: \n"
 			"1 - Up\n"
@@ -121,30 +128,32 @@ int main() {
 			<< endl;
 		cin >> playerMoveChoice;
 
-		if (firstTurnFlag && !secondTurnFlag)
+		if (firstTurnFlag && !secondTurnFlag && !firstWinningFlag && !secondWinningFlag)
 		{
 			movePlayer(playerMoveChoice, firstPlayer, board);
+
+			if (board.placePlayer(firstPlayer.cNumber, firstPlayer.nCurrentPointRow, firstPlayer.nCurrentPointCol, curRow, curCol))
+			{
+				cout << "game over" << endl;
+				firstWinningFlag = true;
+			}
 		}
-		else if (secondTurnFlag && !firstTurnFlag)
+		else if (secondTurnFlag && !firstTurnFlag && !firstWinningFlag && !secondWinningFlag)
 		{
 			movePlayer(playerMoveChoice, secondPlayer, board);
+		
+			if (board.placePlayer(secondPlayer.cNumber, secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol, curRow, curCol))
+			{
+				cout << "game over" << endl;
+				secondWinningFlag = true;
+			}
 		}
 
 		board.printBoard();
 
 		switchTurns(firstTurnFlag, secondTurnFlag);
 
-		firstWinningFlag = board.isOnWinningMat(firstPlayer.nCurrentPointRow, firstPlayer.nCurrentPointCol);
-		secondWinningFlag = board.isOnWinningMat(secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol);
 	}
 
-	if (firstWinningFlag)
-	{
-		cout << "Player 1 found the winning mat and won the game!" << endl;
-	}
-	else if (secondWinningFlag)
-	{
-		cout << "Player 2 found the winning mat and won the game!" << endl;
-	}
 }
 
