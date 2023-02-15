@@ -81,7 +81,7 @@ bool Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
 	}
 	else if (isOnWinningMat(curRow, curCol))
 	{
-		cout << "Player "<< num << " found the winning mat and won the game!" << endl;
+		cout << "\nPlayer "<< num << " found the winning mat and won the game!" << endl;
 		matrix[curRow][curCol] = num;
 		matrix[row][col] = ' ';
 		cout << endl;
