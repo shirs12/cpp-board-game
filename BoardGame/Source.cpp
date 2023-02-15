@@ -130,9 +130,12 @@ int main() {
 
 		if (firstTurnFlag && !secondTurnFlag && !firstWinningFlag && !secondWinningFlag)
 		{
+			firstPlayerRow = firstPlayer.nCurrentPointRow;
+			firstPlayerCol = firstPlayer.nCurrentPointCol;
+
 			movePlayer(playerMoveChoice, firstPlayer, board);
 
-			if (board.placePlayer(firstPlayer.cNumber, firstPlayer.nCurrentPointRow, firstPlayer.nCurrentPointCol, curRow, curCol))
+			if (board.placePlayer(firstPlayer.cNumber, firstPlayer.nCurrentPointRow, firstPlayer.nCurrentPointCol, firstPlayerRow, firstPlayerCol))
 			{
 				cout << "game over" << endl;
 				firstWinningFlag = true;
@@ -140,9 +143,12 @@ int main() {
 		}
 		else if (secondTurnFlag && !firstTurnFlag && !firstWinningFlag && !secondWinningFlag)
 		{
+			secondPlayerRow = secondPlayer.nCurrentPointRow;
+			secondPlayerCol = secondPlayer.nCurrentPointCol;
+
 			movePlayer(playerMoveChoice, secondPlayer, board);
 		
-			if (board.placePlayer(secondPlayer.cNumber, secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol, curRow, curCol))
+			if (board.placePlayer(secondPlayer.cNumber, secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol, secondPlayerRow, secondPlayerCol))
 			{
 				cout << "game over" << endl;
 				secondWinningFlag = true;
