@@ -7,10 +7,6 @@ using namespace std;
 * matrix 30x30
 * 2 players
 * winning rectangle somewhere in the matrix.
-* top-left corner of the winning rectangle -> input
-* height and width of the winning rectangle -> input
-* 2 start points for every player -> input
-*
 */
 
 // move player on board
