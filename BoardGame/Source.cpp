@@ -9,6 +9,63 @@ using namespace std;
 * winning rectangle somewhere in the matrix.
 */
 
+// input row and col from user
+Player inputPlayerPoint(char cNum) {
+	int row = -1;
+	int col = -1;
+
+	cout << "enter row: ";
+	cin >> row;
+	cout << "enter colomn: ";
+	cin >> col;
+	cout << endl;
+
+	while (row <= 0 || col <= 0)
+	{
+		cout << "Out of border. Please try again" << endl;
+		cout << "enter row: ";
+		cin >> row;
+		cout << "\nenter colomn: ";
+		cin >> col;
+		cout << endl;
+	}
+
+	Player player(cNum, row, col);
+	
+	return player;
+}
+
+// input winning mat from user
+void inputWinningMat(Board& board) {
+	int row = -1;
+	int col = -1;
+	int height = -1;
+	int width = -1;
+
+	while (row <= 0 || col <= 0 || height <= 0 || width <= 0)
+	{
+		cout << "Winning mat's top-left corner point\nenter row: ";
+		cin >> row;
+		cout << "\nenter colomn: ";
+		cin >> col;
+		cout << endl;
+
+		// input dimentions from user - winning mat
+		cout << "\nWinning mat's dimentions\nenter height: ";
+		cin >> height;
+		cout << "\nenter width: ";
+		cin >> width;
+		cout << endl;
+
+		if (row <= 0 || col <= 0 || height <= 0 || width <= 0)
+		{
+			cout << "Out of border. Please try again" << endl;
+		}
+	}
+
+	board.initWinningMat(row, col, height, width);
+}
+
 // move player on board
 void movePlayer(int& num, Player& player, Board& board) {
 	int curRow = player.nCurrentPointRow;
@@ -39,6 +96,7 @@ void movePlayer(int& num, Player& player, Board& board) {
 	board.placePlayer(player.cNumber, player.nCurrentPointRow, player.nCurrentPointCol, curRow, curCol);
 }
 
+// switch players turns flags
 void switchTurns(bool& flag1, bool& flag2) {
 	flag1 = !flag1;
 	flag2 = !flag2;
@@ -57,11 +115,6 @@ int main() {
 	int secondPlayerRow;
 	int secondPlayerCol;
 
-	int winningMatRow;
-	int winningMatCol;
-	int winningMatHeight;
-	int winningMatWidth;
-
 	int playerMoveChoice;
 
 	bool firstTurnFlag = true;
@@ -73,13 +126,15 @@ int main() {
 #pragma endregion
 
 #pragma region User Input - Initial Board & Players
+
+	cout << "Welcome!\n" << endl;
+
 	while (choice != 2)
 	{
-		cout << "Welcome!" << endl;
 		cout << "Menu:"
 			"\n1. start the game"
 			"\n2. Exit"
-			"\nEnter your choice: ";
+			"\n\nEnter your choice: ";
 		cin >> choice;
 		cout << endl;
 
@@ -95,44 +150,22 @@ int main() {
 			board.printBoard();
 
 			// input row and col from user - first player
-			cout << "First player starting point\nenter row: ";
-			cin >> firstPlayerRow;
-			cout << "\nenter colomn: ";
-			cin >> firstPlayerCol;
-			cout << endl;
+			cout << "First player starting point" << endl;
 
-			Player firstPlayer('1', firstPlayerRow, firstPlayerCol);
+			Player firstPlayer = inputPlayerPoint('1');
 			board.initPlayer(firstPlayer.cNumber, firstPlayer.nCurrentPointRow, firstPlayer.nCurrentPointCol);
 
 			board.printBoard();
 
 			// input row and col from user - second plyer
-			cout << "\nSecond player starting point\nenter row: ";
-			cin >> secondPlayerRow;
-			cout << "\nenter colomn: ";
-			cin >> secondPlayerCol;
-			cout << endl;
+			cout << "\nSecond player starting point" << endl;
 
-			Player secondPlayer('2', secondPlayerRow, secondPlayerCol);
+			Player secondPlayer = inputPlayerPoint('2');
 			board.initPlayer(secondPlayer.cNumber, secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol);
 
 			board.printBoard();
 
-			// input row and col from user - winning mat
-			cout << "Winning mat's top-left corner point\nenter row: ";
-			cin >> winningMatRow;
-			cout << "\nenter colomn: ";
-			cin >> winningMatCol;
-			cout << endl;
-
-			// input dimentions from user - winning mat
-			cout << "\nWinning mat's dimentions\nenter height: ";
-			cin >> winningMatHeight;
-			cout << "\nenter width: ";
-			cin >> winningMatWidth;
-			cout << endl;
-
-			board.initWinningMat(winningMatRow, winningMatCol, winningMatHeight, winningMatWidth);
+			inputWinningMat(board);
 
 #pragma endregion
 
