@@ -9,9 +9,10 @@ private:
 	// TODO: change matrix to 31x31 dimensions.
 	char matrix[11][11] = {};
 
-	const int SIZE = sizeof(matrix[0]);
 
 public:
+
+	const int SIZE = sizeof(matrix[0]);
 
 	// constructor
 	Board();
@@ -27,7 +28,7 @@ public:
 	// place player's point on board after moving
 	bool placePlayer(char num, int curRow, int curCol, int row, int col);
 
-	//checks if one of the players won
+	// checks if one of the players won
 	bool isOnWinningMat(int row, int col);
 
 	// print matrix

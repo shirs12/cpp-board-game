@@ -81,10 +81,10 @@ bool Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
 	}
 	else if (isOnWinningMat(curRow, curCol))
 	{
-		cout << "\nPlayer "<< num << " found the winning mat and won the game!" << endl;
 		matrix[curRow][curCol] = num;
 		matrix[row][col] = ' ';
-		cout << endl;
+		printBoard();
+		cout << "\nPlayer "<< num << " found the winning mat and won the game!" << endl;
 		return true;
 	}
 	else
@@ -97,7 +97,7 @@ bool Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
 	return false;
 }
 
-//checks if one of the players won
+// checks if one of the players won
 bool Board::isOnWinningMat(int row, int col) {
 	if (matrix[row][col] == '*')
 	{

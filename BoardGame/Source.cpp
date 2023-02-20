@@ -10,7 +10,7 @@ using namespace std;
 */
 
 // input row and col from user
-Player inputPlayerPoint(char cNum) {
+Player inputPlayerPoint(char cNum, Board& board) {
 	int row = -1;
 	int col = -1;
 
@@ -20,7 +20,7 @@ Player inputPlayerPoint(char cNum) {
 	cin >> col;
 	cout << endl;
 
-	while (row <= 0 || col <= 0)
+	while (row <= 0 || col <= 0 || row >= board.SIZE || col >= board.SIZE)
 	{
 		cout << "Out of border. Please try again" << endl;
 		cout << "enter row: ";
@@ -67,7 +67,7 @@ void inputWinningMat(Board& board) {
 }
 
 // move player on board
-void movePlayer(int& num, Player& player, Board& board) {
+bool movePlayer(int& num, Player& player, Board& board) {
 	int curRow = player.nCurrentPointRow;
 	int curCol = player.nCurrentPointCol;
 
@@ -93,7 +93,7 @@ void movePlayer(int& num, Player& player, Board& board) {
 		break;
 	}
 
-	board.placePlayer(player.cNumber, player.nCurrentPointRow, player.nCurrentPointCol, curRow, curCol);
+	return board.placePlayer(player.cNumber, player.nCurrentPointRow, player.nCurrentPointCol, curRow, curCol);
 }
 
 // switch players turns flags
@@ -152,7 +152,7 @@ int main() {
 			// input row and col from user - first player
 			cout << "First player starting point" << endl;
 
-			Player firstPlayer = inputPlayerPoint('1');
+			Player firstPlayer = inputPlayerPoint('1', board);
 			board.initPlayer(firstPlayer.cNumber, firstPlayer.nCurrentPointRow, firstPlayer.nCurrentPointCol);
 
 			board.printBoard();
@@ -160,7 +160,7 @@ int main() {
 			// input row and col from user - second plyer
 			cout << "\nSecond player starting point" << endl;
 
-			Player secondPlayer = inputPlayerPoint('2');
+			Player secondPlayer = inputPlayerPoint('2', board);
 			board.initPlayer(secondPlayer.cNumber, secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol);
 
 			board.printBoard();
@@ -186,12 +186,15 @@ int main() {
 					firstPlayerRow = firstPlayer.nCurrentPointRow;
 					firstPlayerCol = firstPlayer.nCurrentPointCol;
 
-					movePlayer(playerMoveChoice, firstPlayer, board);
+					firstWinningFlag = movePlayer(playerMoveChoice, firstPlayer, board);
 
-					if (board.placePlayer(firstPlayer.cNumber, firstPlayer.nCurrentPointRow, firstPlayer.nCurrentPointCol, firstPlayerRow, firstPlayerCol))
+					if (firstWinningFlag)
 					{
-						cout << "game over" << endl;
-						firstWinningFlag = true;
+						cout << "game over\n" << endl;
+					}
+					else
+					{
+						board.printBoard();
 					}
 				}
 				else if (secondTurnFlag && !firstTurnFlag && !firstWinningFlag && !secondWinningFlag)
@@ -199,16 +202,17 @@ int main() {
 					secondPlayerRow = secondPlayer.nCurrentPointRow;
 					secondPlayerCol = secondPlayer.nCurrentPointCol;
 
-					movePlayer(playerMoveChoice, secondPlayer, board);
+					secondWinningFlag = movePlayer(playerMoveChoice, secondPlayer, board);
 
-					if (board.placePlayer(secondPlayer.cNumber, secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol, secondPlayerRow, secondPlayerCol))
+					if (secondWinningFlag)
 					{
-						cout << "game over" << endl;
-						secondWinningFlag = true;
+						cout << "game over\n" << endl;
+					}
+					else
+					{
+						board.printBoard();
 					}
 				}
-
-				board.printBoard();
 
 				switchTurns(firstTurnFlag, secondTurnFlag);
 
