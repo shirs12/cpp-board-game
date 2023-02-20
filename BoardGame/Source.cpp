@@ -10,7 +10,7 @@ using namespace std;
 */
 
 // move player on board
-void movePlayer(int num, Player player, Board board) {
+void movePlayer(int& num, Player& player, Board& board) {
 	int curRow = player.nCurrentPointRow;
 	int curCol = player.nCurrentPointCol;
 
@@ -39,7 +39,7 @@ void movePlayer(int num, Player player, Board board) {
 	board.placePlayer(player.cNumber, player.nCurrentPointRow, player.nCurrentPointCol, curRow, curCol);
 }
 
-void switchTurns(bool flag1, bool flag2) {
+void switchTurns(bool& flag1, bool& flag2) {
 	flag1 = !flag1;
 	flag2 = !flag2;
 }
