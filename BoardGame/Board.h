@@ -20,7 +20,10 @@ public:
 	// methods:
 
 	// initialize player's point on board
-	void initPlayer(char num, int row, int col);
+	bool initPlayer(char num, int row, int col);
+
+	// checks if victory-island can be placed - there is no player in that area
+	bool isEmptyArea(int row, int col, int height, int width);
 
 	// initialize winning-mat on board
 	bool initWinningMat(int row, int col, int height, int width);

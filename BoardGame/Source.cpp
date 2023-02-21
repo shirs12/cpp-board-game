@@ -63,7 +63,7 @@ void inputWinningMat(Board& board) {
 
 		if (!isInBorder)
 		{
-			cout << "Out of bounds. Please try again" << endl;
+			cout << "Out of bounds. Please try again\n" << endl;
 		}
 	}
 	cout << "Winning-mat placed on board successfully." << endl;
@@ -121,6 +121,8 @@ int main() {
 
 	int playerMoveChoice;
 
+	bool isPointEmpty = false;
+
 	bool firstTurnFlag = true;
 	bool secondTurnFlag = false;
 
@@ -161,11 +163,19 @@ int main() {
 
 			board.printBoard();
 
-			// input row and col from user - second plyer
+			// input row and col from user - second player
 			cout << "\nSecond player starting point" << endl;
 
 			Player secondPlayer = inputPlayerPoint('2', board);
-			board.initPlayer(secondPlayer.cNumber, secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol);
+			isPointEmpty = board.initPlayer(secondPlayer.cNumber, secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol);
+
+			// if second player entered the same input as first player
+			while (!isPointEmpty)
+			{
+				cout << "Please try again" << endl;
+				secondPlayer = inputPlayerPoint('2', board);
+				isPointEmpty = board.initPlayer(secondPlayer.cNumber, secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol);
+			}
 
 			board.printBoard();
 

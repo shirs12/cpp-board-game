@@ -40,22 +40,50 @@ Board::Board() {
 // methods:
 
 // initialize player's point on board
-void Board::initPlayer(char num, int row, int col) {
+bool Board::initPlayer(char num, int row, int col) {
+	//TODO: check if both players chose the same point and return true/false
 	if (row < 1 || row > (SIZE - 2) || col < 1 || col > (SIZE - 2))
 	{
 		cout << "Out of bounds." << endl;
+		return false;
+	}
+	else if (matrix[row][col] != ' ')
+	{
+		cout << "Other player is already placed at this point." << endl;
+		return false;
 	}
 	else
 	{
 		matrix[row][col] = num;
 		cout << "player placed on board successfully." << endl;
+		return true;
 	}
+	return false;
+}
+
+// checks if victory-island can be placed - there is no player in that area
+bool Board::isEmptyArea(int row, int col, int height, int width) {
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			if (matrix[row + i][col + j] != ' ' && matrix[row + i][col + j] != '#')
+			{
+				cout << "Victory-Island can not be placed where player is alresdy placed." << endl;
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 // initialize winning-mat on board
 bool Board::initWinningMat(int row, int col, int height, int width) {
+
+	bool empty = isEmptyArea(row, col, height, width);
+
 	if (row < 1 || row > (SIZE - 2) || col < 1 || col > (SIZE - 2)
-		|| (row + height) > (SIZE - 1) || (col + width) > (SIZE - 1))
+		|| (row + height) > (SIZE - 1) || (col + width) > (SIZE - 1) || !empty)
 	{
 		return false;
 	}
@@ -78,6 +106,7 @@ bool Board::initWinningMat(int row, int col, int height, int width) {
 
 // initialize player's point on board
 bool Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
+	//TODO: check if both players moved to the same point and return true/false
 	if (row < 1 || row > (SIZE - 2) || col < 1 || col > (SIZE - 2))
 	{
 		cout << "Out of bounds." << endl;
