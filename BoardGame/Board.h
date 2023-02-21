@@ -23,7 +23,7 @@ public:
 	void initPlayer(char num, int row, int col);
 
 	// initialize winning-mat on board
-	void initWinningMat(int row, int col, int height, int width);
+	bool initWinningMat(int row, int col, int height, int width);
 
 	// place player's point on board after moving
 	bool placePlayer(char num, int curRow, int curCol, int row, int col);

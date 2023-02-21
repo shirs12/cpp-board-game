@@ -6,7 +6,7 @@ using namespace std;
 /*
 * matrix 30x30
 * 2 players
-* winning rectangle somewhere in the matrix.
+* rectangle somewhere in the matrix to reach.
 */
 
 // input row and col from user
@@ -20,12 +20,12 @@ Player inputPlayerPoint(char cNum, Board& board) {
 	cin >> col;
 	cout << endl;
 
-	while (row <= 0 || col <= 0 || row >= board.SIZE || col >= board.SIZE)
+	while (row <= 0 || col <= 0 || row >= board.SIZE - 1 || col >= board.SIZE - 1)
 	{
-		cout << "Out of border. Please try again" << endl;
+		cout << "Out of bounds. Please try again" << endl;
 		cout << "enter row: ";
 		cin >> row;
-		cout << "\nenter colomn: ";
+		cout << "enter colomn: ";
 		cin >> col;
 		cout << endl;
 	}
@@ -42,27 +42,31 @@ void inputWinningMat(Board& board) {
 	int height = -1;
 	int width = -1;
 
-	while (row <= 0 || col <= 0 || height <= 0 || width <= 0)
+	bool isInBorder = board.initWinningMat(row, col, height, width);
+
+	while (!isInBorder)
 	{
-		cout << "Winning mat's top-left corner point\nenter row: ";
+		cout << "Winning-mat's top-left corner point\nenter row: ";
 		cin >> row;
-		cout << "\nenter colomn: ";
+		cout << "enter colomn: ";
 		cin >> col;
 		cout << endl;
 
 		// input dimentions from user - winning mat
-		cout << "\nWinning mat's dimentions\nenter height: ";
+		cout << "\nWinning-mat's dimentions\nenter height: ";
 		cin >> height;
-		cout << "\nenter width: ";
+		cout << "enter width: ";
 		cin >> width;
 		cout << endl;
 
-		if (row <= 0 || col <= 0 || height <= 0 || width <= 0)
+		isInBorder = board.initWinningMat(row, col, height, width);
+
+		if (!isInBorder)
 		{
-			cout << "Out of border. Please try again" << endl;
+			cout << "Out of bounds. Please try again" << endl;
 		}
 	}
-
+	cout << "Winning-mat placed on board successfully." << endl;
 	board.initWinningMat(row, col, height, width);
 }
 

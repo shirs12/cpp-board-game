@@ -43,7 +43,7 @@ Board::Board() {
 void Board::initPlayer(char num, int row, int col) {
 	if (row < 1 || row > (SIZE - 2) || col < 1 || col > (SIZE - 2))
 	{
-		cout << "Out of border." << endl;
+		cout << "Out of bounds." << endl;
 	}
 	else
 	{
@@ -53,11 +53,11 @@ void Board::initPlayer(char num, int row, int col) {
 }
 
 // initialize winning-mat on board
-void Board::initWinningMat(int row, int col, int height, int width) {
+bool Board::initWinningMat(int row, int col, int height, int width) {
 	if (row < 1 || row > (SIZE - 2) || col < 1 || col > (SIZE - 2)
 		|| (row + height) > (SIZE - 1) || (col + width) > (SIZE - 1))
 	{
-		cout << "Out of border." << endl;
+		return false;
 	}
 	else
 	{
@@ -65,18 +65,22 @@ void Board::initWinningMat(int row, int col, int height, int width) {
 		{
 			for (int j = 0; j < width; j++)
 			{
-				matrix[row + i][col + j] = '*';
+				if (matrix[row + i][col + j] != '#')
+				{
+					matrix[row + i][col + j] = '*';
+				}
 			}
 		}
-		cout << "Winning-mat placed on board successfully." << endl;
+		return true;
 	}
+	return false;
 }
 
 // initialize player's point on board
 bool Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
 	if (row < 1 || row > (SIZE - 2) || col < 1 || col > (SIZE - 2))
 	{
-		cout << "Out of border." << endl;
+		cout << "Out of bounds." << endl;
 		return false;
 	}
 	else if (isOnWinningMat(curRow, curCol))
@@ -84,7 +88,7 @@ bool Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
 		matrix[curRow][curCol] = num;
 		matrix[row][col] = ' ';
 		printBoard();
-		cout << "\nPlayer "<< num << " found the winning mat and won the game!" << endl;
+		cout << "\nPlayer "<< num << " found the winning-mat and won the game!" << endl;
 		return true;
 	}
 	else
