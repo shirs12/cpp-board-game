@@ -34,6 +34,9 @@ public:
 	// checks if one of the players won
 	bool isOnWinningMat(int row, int col);
 
+	// clears board
+	void clearBoard();
+
 	// print matrix
 	void printBoard();
 };

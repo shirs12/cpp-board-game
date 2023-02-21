@@ -232,6 +232,7 @@ int main() {
 
 			}
 		}
+		board.clearBoard();
 	}
 	
 	cout << "You chose to exit the game..." << endl;
