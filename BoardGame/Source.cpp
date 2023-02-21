@@ -35,39 +35,39 @@ Player inputPlayerPoint(char cNum, Board& board) {
 	return player;
 }
 
-// input winning mat from user
-void inputWinningMat(Board& board) {
+// input victory-island from user
+void inputVictoryIsland(Board& board) {
 	int row = -1;
 	int col = -1;
 	int height = -1;
 	int width = -1;
 
-	bool isInBorder = board.initWinningMat(row, col, height, width);
+	bool isInBorder = board.initVictoryIsland(row, col, height, width);
 
 	while (!isInBorder)
 	{
-		cout << "Winning-mat's top-left corner point\nenter row: ";
+		cout << "Victory-Island's top-left corner point\nenter row: ";
 		cin >> row;
 		cout << "enter colomn: ";
 		cin >> col;
 		cout << endl;
 
-		// input dimentions from user - winning mat
-		cout << "Winning-mat's dimentions\nenter height: ";
+		// input dimentions from user - victory-island
+		cout << "Victory-Island's dimentions\nenter height: ";
 		cin >> height;
 		cout << "enter width: ";
 		cin >> width;
 		cout << endl;
 
-		isInBorder = board.initWinningMat(row, col, height, width);
+		isInBorder = board.initVictoryIsland(row, col, height, width);
 
 		if (!isInBorder)
 		{
 			cout << "Out of bounds. Please try again\n" << endl;
 		}
 	}
-	cout << "Winning-mat placed on board successfully." << endl;
-	board.initWinningMat(row, col, height, width);
+	cout << "Victory-Island placed on board successfully." << endl;
+	board.initVictoryIsland(row, col, height, width);
 }
 
 // switch-case for the user's input direction
@@ -205,7 +205,7 @@ int main() {
 
 			board.printBoard();
 
-			inputWinningMat(board);
+			inputVictoryIsland(board);
 
 #pragma endregion
 
@@ -260,6 +260,7 @@ int main() {
 
 		// restarting game
 		board.clearBoard();
+
 		firstTurnFlag = true;
 		secondTurnFlag = false;
 		firstWinningFlag = false;

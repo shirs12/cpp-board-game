@@ -76,8 +76,8 @@ bool Board::isEmptyArea(int row, int col, int height, int width) {
 	return true;
 }
 
-// initialize winning-mat on board
-bool Board::initWinningMat(int row, int col, int height, int width) {
+// initialize victory-island on board
+bool Board::initVictoryIsland(int row, int col, int height, int width) {
 
 	bool empty = isEmptyArea(row, col, height, width);
 
@@ -103,6 +103,7 @@ bool Board::initWinningMat(int row, int col, int height, int width) {
 	return false;
 }
 
+//  checks if other player is already at the given point
 bool Board::isOtherPlayerPoint(int row, int col) {
 	if (matrix[row][col] != '*' && matrix[row][col] != ' ' && matrix[row][col] != '#')
 	{
@@ -118,12 +119,12 @@ bool Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
 		cout << "Out of bounds." << endl;
 		return false;
 	}
-	else if (isOnWinningMat(curRow, curCol))
+	else if (isAtVictoryIsland(curRow, curCol))
 	{
 		matrix[curRow][curCol] = num;
 		matrix[row][col] = ' ';
 		printBoard();
-		cout << "\nPlayer "<< num << " found the winning-mat and won the game!" << endl;
+		cout << "\nPlayer "<< num << " found the victory-island and won the game!" << endl;
 		return true;
 	}
 	else
@@ -137,7 +138,7 @@ bool Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
 }
 
 // checks if one of the players won
-bool Board::isOnWinningMat(int row, int col) {
+bool Board::isAtVictoryIsland(int row, int col) {
 	if (matrix[row][col] == '*')
 	{
 		return true;
