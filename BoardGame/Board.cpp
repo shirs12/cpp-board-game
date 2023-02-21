@@ -66,9 +66,9 @@ bool Board::isEmptyArea(int row, int col, int height, int width) {
 	{
 		for (int j = 0; j < width; j++)
 		{
-			if (matrix[row + i][col + j] != ' ' && matrix[row + i][col + j] != '#')
+			if (matrix[row + i][col + j] != ' ' && matrix[row + i][col + j] != '#' && matrix[row + i][col + j] != '*')
 			{
-				cout << "Victory-Island can not be placed where player is alresdy placed." << endl;
+				cout << "Victory-Island can not be placed where player is already placed." << endl;
 				return false;
 			}
 		}
@@ -103,9 +103,16 @@ bool Board::initWinningMat(int row, int col, int height, int width) {
 	return false;
 }
 
+bool Board::isOtherPlayerPoint(int row, int col) {
+	if (matrix[row][col] != '*' && matrix[row][col] != ' ' && matrix[row][col] != '#')
+	{
+		return true;
+	}
+	return false;
+}
+
 // initialize player's point on board
 bool Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
-	//TODO: check if both players moved to the same point and return true/false
 	if (row < 1 || row > (SIZE - 2) || col < 1 || col > (SIZE - 2))
 	{
 		cout << "Out of bounds." << endl;

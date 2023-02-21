@@ -53,7 +53,7 @@ void inputWinningMat(Board& board) {
 		cout << endl;
 
 		// input dimentions from user - winning mat
-		cout << "\nWinning-mat's dimentions\nenter height: ";
+		cout << "Winning-mat's dimentions\nenter height: ";
 		cin >> height;
 		cout << "enter width: ";
 		cin >> width;
@@ -70,11 +70,8 @@ void inputWinningMat(Board& board) {
 	board.initWinningMat(row, col, height, width);
 }
 
-// move player on board
-bool movePlayer(int& num, Player& player, Board& board) {
-	int curRow = player.nCurrentPointRow;
-	int curCol = player.nCurrentPointCol;
-
+// switch-case for the user's input direction
+void switchDirection(int num, Player& player) {
 	switch (num)
 	{
 	case(1):
@@ -95,6 +92,35 @@ bool movePlayer(int& num, Player& player, Board& board) {
 
 	default:
 		break;
+	}
+}
+
+// move player on board
+bool movePlayer(int& num, Player& player, Board& board) {
+	int curRow = player.nCurrentPointRow;
+	int curCol = player.nCurrentPointCol;
+
+	int otherNum = 0;
+	bool isAlreadyPlaced = false;
+
+	switchDirection(num, player);
+
+	isAlreadyPlaced = board.isOtherPlayerPoint(player.nCurrentPointRow, player.nCurrentPointCol);
+
+	while (isAlreadyPlaced)
+	{
+		player.nCurrentPointRow = curRow;
+		player.nCurrentPointCol = curCol;
+
+		board.printBoard();
+
+		cout << "Other player is already at that point."
+			"\nTry a different direction (1-up, 2-down, 3-right, 4-left):" << endl;
+		cin >> otherNum;
+
+		switchDirection(otherNum, player);
+
+		isAlreadyPlaced = board.isOtherPlayerPoint(player.nCurrentPointRow, player.nCurrentPointCol);
 	}
 
 	return board.placePlayer(player.cNumber, player.nCurrentPointRow, player.nCurrentPointCol, curRow, curCol);
@@ -229,10 +255,15 @@ int main() {
 				}
 
 				switchTurns(firstTurnFlag, secondTurnFlag);
-
 			}
 		}
+
+		// restarting game
 		board.clearBoard();
+		firstTurnFlag = true;
+		secondTurnFlag = false;
+		firstWinningFlag = false;
+		secondWinningFlag = false;
 	}
 	
 	cout << "You chose to exit the game..." << endl;
