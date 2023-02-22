@@ -46,14 +46,14 @@ void inputVictoryIsland(Board& board) {
 
 	while (!isInBorder)
 	{
-		cout << "Victory-Island's top-left corner point\nenter row: ";
+		cout << "Enter Victory-Island's top-left corner point\nenter row: ";
 		cin >> row;
 		cout << "enter colomn: ";
 		cin >> col;
 		cout << endl;
 
 		// input dimentions from user - victory-island
-		cout << "Victory-Island's dimentions\nenter height: ";
+		cout << "Enter Victory-Island's dimentions\nenter height: ";
 		cin >> height;
 		cout << "enter width: ";
 		cin >> width;
@@ -211,6 +211,8 @@ int main() {
 
 			board.printBoard();
 
+			cout << "Player 1" << endl;
+
 			while (!firstWinningFlag && !secondWinningFlag)
 			{
 				cout << "Please enter your step: \n"
@@ -235,6 +237,7 @@ int main() {
 					else
 					{
 						board.printBoard();
+						cout << "Player 2" << endl;
 					}
 				}
 				else if (secondTurnFlag && !firstTurnFlag && !firstWinningFlag && !secondWinningFlag)
@@ -251,6 +254,7 @@ int main() {
 					else
 					{
 						board.printBoard();
+						cout << "Player 1" << endl;
 					}
 				}
 
