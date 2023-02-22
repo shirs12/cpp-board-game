@@ -227,7 +227,7 @@ Please enter your step:
 # # # # # # # # # # #
 ```
 
-The first player who got to the victory-island - win the game.
+The first player who got to the victory-island - wins the game.
 
 ```console
 Player 2
@@ -256,7 +256,7 @@ Player 2 found the victory-island and won the game!
 game over
 ```
 
-If the game is over - the game menu will shown again until The players choose to exit the game.
+If the game is over - the game menu will shown again until the players choose to exit the game.
 
 ```console
 Menu:
