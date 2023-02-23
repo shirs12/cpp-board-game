@@ -124,7 +124,7 @@ bool Board::placePlayer(char num, int curRow, int curCol, int row, int col) {
 		matrix[curRow][curCol] = num;
 		matrix[row][col] = ' ';
 		printBoard();
-		cout << "\nPlayer "<< num << " found the victory-island and won the game!" << endl;
+		cout << "\nPlayer "<< num << " found the victory-island and won this round!" << endl;
 		return true;
 	}
 	else

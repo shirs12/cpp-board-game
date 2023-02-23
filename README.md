@@ -252,7 +252,7 @@ Please enter your step:
 # # # # # # # # # # #
 
 
-Player 2 found the victory-island and won the game!
+Player 2 found the victory-island and won this round!
 game over
 ```
 
@@ -477,11 +477,11 @@ Please enter your step:
 # # # # # # # # # # #
 
 
-Player 2 found the victory-island and won the game!
+Player 2 found the victory-island and won this round!
 game over
 ```
 
-If the players choose to exit the game, an appropriate message will appear, and the program will stop running.
+If the players choose to exit the game, an appropriate message and this game statistics will appear, and the program will stop running.
 
 ```console
 Menu:
@@ -491,6 +491,13 @@ Menu:
 Enter your choice: 2
 
 You chose to exit the game...
+
+Final Score:
+............
+Player 1: 0
+Player 2: 1
+
+Player 2 won the game!
 ```
 
 enjoy!
