@@ -132,12 +132,34 @@ void switchTurns(bool& flag1, bool& flag2) {
 	flag2 = !flag2;
 }
 
+void gameStatistics(Player first, Player second) {
+	cout << "Final Score:" << endl;
+	cout << "............" << endl;
+	cout << "Player 1: " << first.getWin() << endl;
+	cout << "Player 2: " << second.getWin() << endl;
+
+	if (first.getWin() > second.getWin())
+	{
+		cout << "\nPlayer 1 won the game! " << endl;
+	}
+	else if (first.getWin() < second.getWin())
+	{
+		cout << "\nPlayer 2 won the game! " << endl;
+	}
+	else
+	{
+		cout << "\nThe game ended in a tie" << endl;
+	}
+}
+
 int main() {
 
 #pragma region Variables Declaration
 	int choice = 0;
 
 	Board board;
+	Player firstPlayer;
+	Player secondPlayer;
 
 	int firstPlayerRow;
 	int firstPlayerCol;
@@ -184,7 +206,7 @@ int main() {
 			// input row and col from user - first player
 			cout << "First player starting point" << endl;
 
-			Player firstPlayer = inputPlayerPoint('1', board);
+			firstPlayer = inputPlayerPoint('1', board);
 			board.initPlayer(firstPlayer.cNumber, firstPlayer.nCurrentPointRow, firstPlayer.nCurrentPointCol);
 
 			board.printBoard();
@@ -192,7 +214,7 @@ int main() {
 			// input row and col from user - second player
 			cout << "\nSecond player starting point" << endl;
 
-			Player secondPlayer = inputPlayerPoint('2', board);
+			secondPlayer = inputPlayerPoint('2', board);
 			isPointEmpty = board.initPlayer(secondPlayer.cNumber, secondPlayer.nCurrentPointRow, secondPlayer.nCurrentPointCol);
 
 			// if second player entered the same input as first player
@@ -233,6 +255,7 @@ int main() {
 					if (firstWinningFlag)
 					{
 						cout << "game over\n" << endl;
+						firstPlayer.addWin();
 					}
 					else
 					{
@@ -250,6 +273,7 @@ int main() {
 					if (secondWinningFlag)
 					{
 						cout << "game over\n" << endl;
+						secondPlayer.addWin();
 					}
 					else
 					{
@@ -271,7 +295,9 @@ int main() {
 		secondWinningFlag = false;
 	}
 	
-	cout << "You chose to exit the game..." << endl;
+	cout << "You chose to exit the game...\n" << endl;
+
+	gameStatistics(firstPlayer, secondPlayer);
 
 }
 

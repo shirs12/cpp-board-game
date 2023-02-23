@@ -1,7 +1,12 @@
 #include "Player.h"
 
 // constructor
+Player::Player() {
+
+}
+
 Player::Player(char num, int row, int col) {
+	countWin = 0;
 	cNumber = num;
 
 	if (row < 0 || col < 0)
@@ -50,4 +55,11 @@ void Player::moveRight() {
 	nCurrentPointCol++;
 }
 
+void Player::addWin() {
+	countWin++;
+}
+
+int Player::getWin() {
+	return countWin;
+}
 

@@ -9,10 +9,14 @@ public:
 
 	int nStartPointRow = 0;
 	int nStartPointCol = 0;
+
 	int nCurrentPointRow = 0;
 	int nCurrentPointCol = 0;
 
+	int countWin;
+
 	// constructor
+	Player();
 	Player(char num, int row, int col);
 
 	// methods
@@ -24,6 +28,8 @@ public:
 
 	void moveRight();
 
+	void addWin();
 
+	int getWin();
 };
 
